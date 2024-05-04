@@ -190,3 +190,9 @@
     cursor: pointer;
     font-weight: unset;
 }
+
+.task-selector {
+	overflow: hidden;
+	transition: max-height 0.5s ease-in-out;
+	max-height: 0; /* 初期状態では非表示 */
+}

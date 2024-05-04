@@ -1,6 +1,6 @@
 {
-  "name": "Improved UTOL",
-  "description": "Extension for UTokyo LMS on Google Chrome",
+  "name": "Improved UTOL PERSONAL USE",
+  "description": "Extension for UTokyo LMS on Google Chrome for me",
   "version": "3.0.1",
   "manifest_version": 3,
   "content_scripts": [
