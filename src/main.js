@@ -28,6 +28,7 @@ fetch("/lms/task")
     selector.classList.add("task-selector");
     selector.style.display = "none"; // Initially hide the selector
     selector.style.flexDirection = "column"; // Ensure the tasks are listed vertically
+    selector.style.overflowY = "auto"; // Enable vertical scrolling
     const toggleButton = document.createElement("button");
     toggleButton.textContent = "課題を非表示にする";
     toggleButton.onclick = function() {
