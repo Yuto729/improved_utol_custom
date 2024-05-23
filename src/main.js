@@ -38,12 +38,16 @@ fetch("/lms/task")
     };
     const tasks = block.querySelectorAll(".contents-display-flex.contents-display-flex-exchange-sp.sortBlock.result_list_line");
     tasks.forEach((task, index) => {
+      const courseName = task.querySelector(".tasklist-course.break.course span")?.textContent || "Unknown Course";
+      const taskName = task.querySelector(".tasklist-title.answer-test.break span")?.textContent || "Unknown Task";
+      const uniqueTaskId = `${courseName}-${taskName}`;
+
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-      checkbox.id = `task-${index}`;
+      checkbox.id = `task-${uniqueTaskId}`;
       checkbox.dataset.taskId = index;
       
-      const taskStatus = localStorage.getItem(`task-${index}`);
+      const taskStatus = localStorage.getItem(`task-${uniqueTaskId}`);
       if (taskStatus === 'hidden') {
         task.style.display = "none";
         checkbox.checked = true;
@@ -52,16 +56,14 @@ fetch("/lms/task")
         const taskElement = tasks[this.dataset.taskId];
         if (this.checked) {
           taskElement.style.display = "none";
-          localStorage.setItem(`task-${this.dataset.taskId}`, 'hidden');
+          localStorage.setItem(`task-${uniqueTaskId}`, 'hidden');
         } else {
           taskElement.style.display = "";
-          localStorage.removeItem(`task-${this.dataset.taskId}`);
+          localStorage.removeItem(`task-${uniqueTaskId}`);
         }
       };
-      const courseName = task.querySelector(".tasklist-course.break.course span")?.textContent || "Unknown Course";
-      const taskName = task.querySelector(".tasklist-title.answer-test.break span")?.textContent || "Unknown Task";
       const label = document.createElement("label");
-      label.htmlFor = `task-${index}`;
+      label.htmlFor = `task-${uniqueTaskId}`;
       label.textContent = `${courseName}: ${taskName}`;
       label.insertBefore(checkbox, label.firstChild);
       selector.appendChild(label);
